@@ -2,7 +2,8 @@
 # Used only to draw the architecture on the canvas (console -> Infrastructure Composer ->
 # Create project -> Load CloudFormation template). The real environment was built in the console.
 AWSTemplateFormatVersion: '2010-09-09'
-Description: three-tier library management system - VPC, ALB, Auto Scaling EC2, RDS PostgreSQL
+Description: three-tier library management system - VPC, ALB, Auto Scaling EC2,
+  RDS PostgreSQL
 
 Parameters:
   LatestUbuntuAmi:
