@@ -4,3 +4,4 @@ dist/
 report/
 *.env
 .env
+docs/.aws-composer/
