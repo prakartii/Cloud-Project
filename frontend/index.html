@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Library Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Library Management System</h1>
+    <p id="served-by">Served by: loading...</p>
+  </header>
+
+  <main>
+    <p id="message"></p>
+
+    <section>
+      <h2>Books</h2>
+      <table id="books">
+        <thead><tr><th>Title</th><th>Author</th><th>ISBN</th><th>Available</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <h3>Add a book</h3>
+      <form id="book-form">
+        <input id="book-title" placeholder="Title" maxlength="200" required>
+        <input id="book-author" placeholder="Author" maxlength="120" required>
+        <input id="book-isbn" placeholder="ISBN (optional)" maxlength="20">
+        <input id="book-copies" type="number" min="1" max="100" value="1" title="Copies">
+        <button type="submit">Add book</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Members</h2>
+      <table id="members">
+        <thead><tr><th>#</th><th>Name</th><th>Email</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <h3>Add a member</h3>
+      <form id="member-form">
+        <input id="member-name" placeholder="Name" maxlength="100" required>
+        <input id="member-email" type="email" placeholder="Email" maxlength="120" required>
+        <button type="submit">Add member</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Issue a book</h2>
+      <form id="loan-form">
+        <select id="loan-member" required></select>
+        <select id="loan-book" required></select>
+        <button type="submit">Issue (14 days)</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Recent loans</h2>
+      <table id="loans">
+        <thead><tr><th>#</th><th>Book</th><th>Member</th><th>Due</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
