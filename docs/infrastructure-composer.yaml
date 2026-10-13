@@ -176,8 +176,8 @@ Resources:
       DBInstanceClass: db.t3.micro
       AllocatedStorage: '20'
       StorageType: gp3
-      DBName: library
-      MasterUsername: library
+      DBName: librarydb
+      MasterUsername: libadmin
       MasterUserPassword: !Ref DbPassword
       MultiAZ: false
       PubliclyAccessible: false

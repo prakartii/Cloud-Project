@@ -4,7 +4,7 @@
 set -euxo pipefail
 
 S3_BUCKET="CHANGE-ME-bucket"          # bucket holding library-release.tar.gz
-DATABASE_URL="postgres://library:CHANGE-ME@CHANGE-ME.rds.amazonaws.com:5432/library"
+DATABASE_URL="postgres://libadmin:CHANGE-ME@CHANGE-ME.rds.amazonaws.com:5432/librarydb"
 PORT=8080
 
 export DEBIAN_FRONTEND=noninteractive

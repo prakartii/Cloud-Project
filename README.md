@@ -103,19 +103,19 @@ Leave outbound as the default (all traffic).
    - Method: **Standard create**, Engine: **PostgreSQL** (a recent 16.x is fine)
    - Templates: **Free tier** or **Dev/Test**. If Learner Lab complains about the template, choose Dev/Test and keep the settings below
    - DB instance identifier: `library-db`
-   - Master username: `library`, password: choose one and **write it down**
+   - Master username: `libadmin`, password: choose one and **write it down**
    - Instance class: **db.t3.micro** (burstable)
    - Storage: gp3 / 20 GiB, disable storage autoscaling
    - Multi-AZ: **No** (Learner Lab may block it and it costs more)
    - Connectivity: VPC `library`, subnet group `library-db-subnets`, Public access **No**, security group `library-db-sg` (remove `default`)
-   - **Additional configuration → Initial database name: `library`** (easy to miss; the app expects this database)
+   - **Additional configuration → Initial database name: `librarydb`** (easy to miss; the app expects this database)
    - Disable enhanced monitoring and Performance Insights to avoid permission errors
 3. Create the database and wait until the status is **Available** (about 5-10 minutes).
 4. Open the database and copy the **Endpoint** (like `library-db.xxxx.us-east-1.rds.amazonaws.com`).
 
 Your connection string is:
 ```
-postgres://library:<password>@<endpoint>:5432/library
+postgres://libadmin:<password>@<endpoint>:5432/librarydb
 ```
 If the password has special characters (`@ : / ? #`), URL-encode them or choose a simpler password.
 
@@ -175,7 +175,7 @@ Don't commit the real password to GitHub. Keep the edited copy local, or edit it
 **If targets are unhealthy**, in order:
 - Open a shell on an instance: *EC2 → Instances →* select it *→ Connect → Session Manager* (the instances are private and use the NAT gateway for outbound access; if Session Manager isn't available in your lab, launch the template once with the `vockey` key pair and SSH from a temporary public instance). Then check `sudo tail -n 50 /var/log/cloud-init-output.log`
 - `sudo systemctl status library` and `sudo journalctl -u library -n 50`
-- Common causes: wrong `DATABASE_URL`, the database wasn't created with initial name `library`, `library-db-sg` not allowing `library-app-sg`, or no NAT route so `apt` / S3 download failed.
+- Common causes: wrong `DATABASE_URL`, the database wasn't created with initial name `librarydb`, `library-db-sg` not allowing `library-app-sg`, or no NAT route so `apt` / S3 download failed.
 
 ### 9. AWS Budgets
 
