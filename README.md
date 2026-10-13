@@ -191,6 +191,21 @@ Delete in this order: Auto Scaling group → load balancer → target group → 
 
 ## Redeploy with the AWS CLI (what was actually run)
 
+### One-command redeploy
+
+```bash
+# 1. Start the Learner Lab, save the credentials block to /dev/shm/aws-lab-creds (see below), then:
+export AWS_SHARED_CREDENTIALS_FILE=/dev/shm/aws-lab-creds AWS_DEFAULT_REGION=us-east-1
+BUDGET_EMAIL=<your-email> ./deploy/aws-up.sh     # builds the package if needed, creates everything (~12 minutes), prints the URL
+# ... take screenshots, run the load test ...
+./deploy/aws-down.sh                              # deletes everything it created (found by name tag), keeps the budget
+```
+
+- `aws-up.sh` is the whole environment from the sections below as one script. It refuses to run if a `library-vpc` already exists, and it prints the generated database password once. `BUDGET_EMAIL` is optional (it also creates the $10 monthly budget); verify that email in the console afterwards.
+- `aws-down.sh` needs no state file. It finds resources by their `library-*` names, waits for dependencies (ASG instances, ALB, NAT gateway, RDS) before deleting the target group, security groups, subnets and VPC, and prints a "remaining" summary at the end that should show all zeros. `KEEP_BUCKET=1` keeps the S3 bucket and `DELETE_BUDGET=1` also removes the budget.
+- The bucket is named `library-lab-<account id>`, so it is unique per account and the scripts can find it again.
+- The commands below are the same steps written out one by one, for reference or for running a stage at a time.
+
 The console guide above is the manual route. This section records the CLI commands used to build the same environment, so it can be recreated quickly after a Learner Lab reset. Replace the `<...>` placeholders. Nothing here contains credentials or secrets.
 
 ### Learner Lab facts that affect redeploying
